@@ -5,8 +5,11 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 
+import charityRoutes from "./routes/charityRoutes.js";
+
 const app = express();
 
+app.use("/api/charity", charityRoutes);
 app.use(cors({
   origin: "*"
 }));
