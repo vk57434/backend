@@ -8,25 +8,20 @@ import charityRoutes from "./routes/charityRoutes.js";
 import scoreRoutes from "./routes/scoreRoutes.js";
 import drawRoutes from "./routes/drawRoutes.js";
 
-app.use("/api/draw", drawRoutes);
 const app = express();
 
-// ✅ 1. FIRST: CORS
-app.use(cors({
-  origin: "*"
-}));
-
-// ✅ 2. THEN: JSON parser
+// ✅ Middleware
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-// ✅ 3. THEN: ROUTES
+// ✅ Routes 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/charity", charityRoutes);
 app.use("/api/score", scoreRoutes);
-app.use("/api/draw", drawRoutes);
+app.use("/api/draw", drawRoutes); 
 
-
+// ✅ Start server
 app.listen(process.env.PORT, () =>
   console.log(`Server running on ${process.env.PORT}`)
 );
