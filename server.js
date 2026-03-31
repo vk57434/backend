@@ -20,6 +20,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/charity", charityRoutes);
+app.use("/api/score", scoreRoutes);
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on ${process.env.PORT}`)
