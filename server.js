@@ -24,7 +24,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/charity", charityRoutes);
 app.use("/api/score", scoreRoutes);
-
+app.use("/api/draw", drawRoutes);
 
 
 app.listen(process.env.PORT, () =>
