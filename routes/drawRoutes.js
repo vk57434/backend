@@ -6,10 +6,12 @@ const router = express.Router();
 
 // 🎯 Run Draw
 router.get("/run", protect, async (req, res) => {
-  // get all scores
   const { data: scores, error } = await supabase
     .from("scores")
-    .select("*");
+    .select(`
+      *,
+      users (name)
+    `);
 
   if (error) return res.status(400).json({ error });
 
@@ -17,11 +19,10 @@ router.get("/run", protect, async (req, res) => {
     return res.json({ message: "No participants" });
   }
 
-  // random winner
   const random = scores[Math.floor(Math.random() * scores.length)];
 
   res.json({
-    winner: random.user_id,
+    winner: random.users?.name || "Unknown",
     score: random.value,
     message: "🎉 Winner selected!"
   });
