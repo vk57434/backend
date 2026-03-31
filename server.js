@@ -6,7 +6,9 @@ import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import charityRoutes from "./routes/charityRoutes.js";
 import scoreRoutes from "./routes/scoreRoutes.js";
+import drawRoutes from "./routes/drawRoutes.js";
 
+app.use("/api/draw", drawRoutes);
 const app = express();
 
 // ✅ 1. FIRST: CORS
@@ -22,6 +24,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/charity", charityRoutes);
 app.use("/api/score", scoreRoutes);
+
+
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on ${process.env.PORT}`)
