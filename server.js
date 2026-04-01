@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import cors from "cors";
-import bcrypt from "bcrypt"; // ✅ only one
+import bcrypt from "bcryptjs"; // ✅ only one
 import supabase from "./config/db.js";
 
 import authRoutes from "./routes/authRoutes.js";
