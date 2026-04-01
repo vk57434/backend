@@ -4,14 +4,11 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// 🎯 Run Draw
 router.get("/run", protect, async (req, res) => {
+  // get all scores
   const { data: scores, error } = await supabase
     .from("scores")
-    .select(`
-      *,
-      users (name)
-    `);
+    .select("*");
 
   if (error) return res.status(400).json({ error });
 
@@ -19,10 +16,20 @@ router.get("/run", protect, async (req, res) => {
     return res.json({ message: "No participants" });
   }
 
+  // pick random score
   const random = scores[Math.floor(Math.random() * scores.length)];
 
+  // fetch user name separately
+  const { data: user, error: userError } = await supabase
+    .from("users")
+    .select("name")
+    .eq("id", random.user_id)
+    .single();
+
+  if (userError) return res.status(400).json({ userError });
+
   res.json({
-    winner: random.users?.name || "Unknown",
+    winner: user?.name || "Unknown",
     score: random.value,
     message: "🎉 Winner selected!"
   });
